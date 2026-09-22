@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>AI 활용 · 업무 자동화 현황 조사</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css">
+<style>
+:root{
+  --ink:#141414; --mut:#6b6b6b; --soft:#8a8a8a; --line:#e3e3e3; --line2:#141414;
+  --bg:#ffffff; --tint:#f6f6f4; --acc:#2b56d6; --acc-bg:#eef2fd; --acc-line:#b9c8f5;
+  --ok:#1d7a4a; --err:#c62828; --err-bg:#fdf0ef;
+  --r:12px; --w:680px;
+}
+*{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+@media(min-width:1024px){html{font-size:19.2px}}          /* PC 열람자 120% */
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'SUIT Variable','SUIT','Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;line-height:1.55;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+
+/* 상단 바 */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.top .in{max-width:var(--w);margin:0 auto;padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.brand{font-weight:800;font-size:.85rem;letter-spacing:.02em}
+.brand small{font-weight:500;color:var(--mut);margin-left:.4rem}
+.prog{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--mut);white-space:nowrap}
+.bar{width:6.5rem;height:.35rem;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:99px;transition:width .25s}
+
+.wrap{max-width:var(--w);margin:0 auto;padding:1.25rem 1rem 3rem}
+
+/* 머리 */
+.head{padding:.75rem 0 1.25rem}
+.eyebrow{font-size:.78rem;font-weight:700;color:var(--mut);letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:1.6rem;line-height:1.25;margin:.35rem 0 .5rem;font-weight:800;letter-spacing:-.01em}
+.lead{color:var(--mut);margin:0;font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0 0}
+.chip{font-size:.75rem;font-weight:700;padding:.3rem .6rem;border:1px solid var(--line);border-radius:99px;color:var(--mut);background:#fff}
+
+/* 안내 · 약속 */
+.intro{border-top:2px solid var(--line2);padding:1rem 0 0;margin-top:.25rem}
+.intro p{margin:.25rem 0 .75rem}
+.promise{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.promise li{display:flex;gap:.6rem;align-items:flex-start;font-size:.92rem}
+.promise li > b{flex:0 0 auto;width:1.45rem;height:1.45rem;border-radius:50%;background:var(--ink);color:#fff;font-size:.72rem;display:flex;align-items:center;justify-content:center;font-weight:800;margin-top:.1rem}
+
+/* 기프티콘 안내 */
+.gift{display:flex;align-items:center;gap:1rem;margin:1.1rem 0 .25rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:var(--r);background:var(--tint)}
+.gift img{width:4.6rem;height:4.6rem;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.08))}
+.gift .t{font-weight:800;font-size:1rem;margin:0 0 .15rem}
+.gift .d{margin:0;font-size:.85rem;color:var(--mut)}
+.gift.sm{margin:.25rem 0 1rem}
+.gift.sm img{width:3.4rem;height:3.4rem}
+
+/* 섹션 */
+.sec{border-top:2px solid var(--line2);margin-top:1.75rem;padding-top:1rem}
+.sec-h{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.35rem}
+.sec-h .n{font-weight:800;font-size:.8rem;letter-spacing:.06em;color:var(--mut)}
+.sec-h h2{margin:0;font-size:1.15rem;font-weight:800}
+.sec-d{margin:0 0 .5rem;color:var(--mut);font-size:.88rem}
+
+/* 문항 */
+.q{padding:1rem 0 1.1rem;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q.hide{display:none}
+.q-t{display:flex;gap:.5rem;align-items:flex-start;margin:0 0 .6rem;font-weight:700;font-size:1rem}
+.q-t .no{flex:0 0 auto;color:var(--mut);font-weight:700;font-size:.85rem;margin-top:.15rem;min-width:1.6rem}
+.q-t .req{color:var(--err);font-weight:800;margin-left:.15rem}
+.q-s{margin:-.35rem 0 .6rem 2.1rem;color:var(--mut);font-size:.85rem}
+.q.err{background:var(--err-bg);margin:0 -1rem;padding-left:1rem;padding-right:1rem;border-radius:var(--r)}
+.q .msg{display:none;margin:.5rem 0 0 2.1rem;color:var(--err);font-size:.82rem;font-weight:700}
+.q.err .msg{display:block}
+
+.opts{display:flex;flex-wrap:wrap;gap:.45rem;margin-left:2.1rem}
+.opts.col{flex-direction:column;gap:.4rem}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;left:0;top:0}
+.opt label{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .85rem;border:1px solid var(--line);border-radius:99px;background:#fff;cursor:pointer;font-size:.92rem;line-height:1.3;transition:border-color .12s,background .12s;user-select:none;min-height:2.5rem}
+.opts.col .opt label{width:100%;border-radius:10px}
+.opt label:before{content:"";width:1rem;height:1rem;border:1.5px solid #c9c9c9;border-radius:50%;flex:0 0 auto;background:#fff;transition:all .12s}
+.opt.chk label:before{border-radius:4px}
+.opt input:checked+label{border-color:var(--acc);background:var(--acc-bg)}
+.opt input:checked+label:before{background:var(--acc);border-color:var(--acc);box-shadow:inset 0 0 0 3px #fff}
+.opt.chk input:checked+label:before{box-shadow:none;background:var(--acc) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.5l3 3 6-6'/></svg>") center/80% no-repeat}
+.opt input:focus-visible+label{outline:2px solid var(--acc);outline-offset:2px}
+.grp{margin:.15rem 0 .5rem}
+.gl{display:block;font-size:.74rem;font-weight:800;color:var(--mut);letter-spacing:.02em;margin:.55rem 0 .35rem 2.1rem}
+.other{margin:.5rem 0 0 2.1rem;display:none}
+.other.on{display:block}
+
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;margin-left:2.1rem;max-width:26rem}
+.scale .opt label{justify-content:center;padding:.6rem .2rem;border-radius:10px;font-weight:700}
+.scale .opt label:before{display:none}
+.scale-l{display:flex;justify-content:space-between;margin:.35rem 0 0 2.1rem;max-width:26rem;font-size:.75rem;color:var(--mut)}
+
+.in{margin-left:2.1rem}
+.in input[type=text],.in input[type=tel],.in textarea,.in select{width:100%;max-width:26rem;padding:.65rem .8rem;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none;transition:border-color .12s}
+.in textarea{max-width:none;min-height:5.5rem;resize:vertical}
+.in input:focus,.in textarea:focus,.in select:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-bg)}
+.in select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='%23444' stroke-width='1.6' d='M5 8l5 5 5-5'/></svg>") right .7rem center/1rem no-repeat;padding-right:2.2rem}
+.hint{margin:.4rem 0 0 2.1rem;font-size:.8rem;color:var(--soft)}
+.count{font-size:.78rem;color:var(--mut);margin-left:.4rem;font-weight:500}
+
+.consent{margin-left:2.1rem;padding:.8rem .9rem;border:1px solid var(--line);border-radius:10px;background:var(--tint)}
+.consent .opt label{width:100%;border:0;background:transparent;padding:0;border-radius:0;align-items:flex-start;font-size:.9rem}
+.consent .opt input:checked+label{background:transparent}
+.consent small{display:block;margin:.5rem 0 0;color:var(--mut);font-size:.8rem;line-height:1.5}
+
+/* 제출 */
+.submit{margin:1.75rem 0 0;border-top:2px solid var(--line2);padding-top:1.25rem}
+.btn{width:100%;padding:1rem;border:0;border-radius:12px;background:var(--ink);color:#fff;font-weight:800;font-size:1.05rem;cursor:pointer;transition:transform .08s,opacity .12s}
+.btn:active{transform:scale(.99)}
+.btn[disabled]{opacity:.5;cursor:default}
+.note{margin:.7rem 0 0;color:var(--mut);font-size:.82rem;text-align:center}
+.alert{display:none;margin:0 0 .9rem;padding:.8rem .9rem;border-radius:10px;background:var(--err-bg);color:var(--err);font-weight:700;font-size:.9rem}
+.alert.on{display:block}
+
+/* 완료 */
+.done{display:none;text-align:center;padding:3rem 0 2rem}
+.done.on{display:block}
+.done .ok{width:3.6rem;height:3.6rem;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.6rem}
+.done h2{margin:0 0 .5rem;font-size:1.5rem}
+.done p{color:var(--mut);margin:.25rem 0}
+.done .gift{text-align:left;max-width:26rem;margin:1.5rem auto 0}
+
+/* 푸터 */
+.foot{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem;color:var(--mut);font-size:.8rem;line-height:1.7}
+.foot b{color:var(--ink)}
+@media(max-width:480px){
+  .q-t{font-size:.98rem}
+  .opts,.in,.scale,.scale-l,.hint,.other,.q .msg,.consent,.gl{margin-left:0}
+  .q-s{margin-left:0}
+  .brand small{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="in">
+  <div class="brand">KMA 한국능률협회 <small>AI 활용 · 업무 자동화 현황 조사</small></div>
+  <div class="prog"><span id="pt">0 / 0</span><span class="bar"><i id="pb"></i></span></div>
+</div></div>
+
+<div class="wrap">
+
+<form id="f" novalidate>
+
+<header class="head">
+  <div class="eyebrow">2027 AI · 플랫폼 지원 계획 기초 조사</div>
+  <h1>AI 활용 · 업무 자동화 현황 조사</h1>
+  <p class="lead">지금 누가, 무엇을, 어떻게 쓰고 있는지 알아야 좌석·교육·사내 서버를 제대로 정할 수 있습니다. 편하게, 있는 그대로 답해 주세요.</p>
+  <div class="meta"><span class="chip">5~8분</span><span class="chip" id="chipN">문항</span><span class="chip">결과는 부서 단위 집계</span><span class="chip">☕ 완료 시 기프티콘</span></div>
+</header>
+
+<section class="intro">
+  <p><b>우리 회사는 AI와 자체 제작 도구를 "지원하고 교육하되 관리한다"</b>는 방향으로 2027년 계획을 세우고 있습니다. 이 조사는 규제가 아니라 지원의 기준을 잡기 위한 것입니다.</p>
+  <ul class="promise">
+    <li><b>1</b><span><b>불이익 없음</b> — 지금 어떤 도구를 어떻게 쓰든, 어떤 자료를 넣었든 이 조사로 문제 삼지 않습니다. 현황 파악이 목적입니다.</span></li>
+    <li><b>2</b><span><b>부서 단위 집계</b> — 개인별 답변은 공개하지 않고 부서·직무 단위로만 집계합니다.</span></li>
+    <li><b>3</b><span><b>이름·휴대폰 번호는 기프티콘 발송에만</b> — 응답 내용과 분리해 보관하고, 발송이 끝나면 파기합니다.</span></li>
+  </ul>
+  <div class="gift">
+    <img class="cup" alt="">
+    <div><p class="t">끝까지 응답하신 모든 분께 스타벅스 아메리카노 기프티콘을 드립니다</p><p class="d">마지막에 적어 주신 휴대폰 번호로 보내드립니다. <span id="giftWhen"></span></p></div>
+  </div>
+</section>
+
+<div id="qs"></div>
+
+<div class="submit">
+  <div class="alert" id="alert"></div>
+  <button class="btn" type="submit" id="btn">제출하고 기프티콘 받기</button>
+  <p class="note">제출 후에는 수정할 수 없습니다 · 이름·휴대폰 번호는 기프티콘 발송 후 파기</p>
+</div>
+
+</form>
+
+<div class="done" id="done">
+  <div class="ok">✓</div>
+  <h2>제출되었습니다. 고맙습니다!</h2>
+  <p>답해 주신 내용은 2027년 AI·플랫폼 지원 계획에 그대로 반영됩니다.</p>
+  <div class="gift sm"><img class="cup" alt=""><div><p class="t">스타벅스 아메리카노 기프티콘</p><p class="d">적어 주신 휴대폰 번호로 보내드립니다. <span id="giftWhen2"></span></p></div></div>
+</div>
+
+<footer class="foot" id="foot"></footer>
+</div>
+
+<script>
+/* ───────────────────────────── 설정 — 여기만 고치면 됩니다 ───────────────────────────── */
+const CONFIG = {
+  version: 'v1',
+  // 응답 수신함(구글 폼) 주소 — 여기로 보낸 답이 연결된 구글 시트에 자동으로 쌓입니다
+  action: 'https://docs.google.com/forms/d/e/1FAIpQLSe-HHnYCziDUgh44RjCArH3K9SC6HB1QsnVycn_Xpzh1TpwDg/formResponse',
+  // 구글 폼 항목 ID
+  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "F1": 992614929, "Z": 1876301572, "F2_name": 320626572, "F3_phone": 1321200476, "F4_consent": 1300152575, "F5_comment": 702729493, "B9": 28402382, "B10": 1729038618},
+  // A1 소속 선택지 — 조직도 기준으로 수정 (큰 단위)
+  depts: ['경영자교육센터','회원서비스센터','공개교육센터','인재개발 부문','글로벌 부문','공공 부문','마케팅팀','대외협력팀','경영지원(기획·재무·인사·총무)','시스템·인프라','기타(직접 입력)'],
+  giftWhen: '설문 마감 후 순차 발송 예정입니다.',   // 발송 시점 문구
+  contact: { team: '마케팅팀', name: '(담당자 이름)', tel: '(내선 번호)', mail: '(이메일)' },
+};
+
+/* ───────────────────────────── 문항 ───────────────────────────── */
+const SECTIONS = [
+  {n:'01', t:'기본', d:'집계 단위를 정하기 위한 세 가지'},
+  {n:'02', t:'AI 사용', d:'지금 실제로 쓰는 방식 그대로'},
+  {n:'03', t:'자료 취급', d:'현황 파악용 — 어떤 답이든 불이익이 없습니다'},
+  {n:'04', t:'자체 제작', d:'폼·자동화·챗봇·웹앱 등 업무용으로 만든 것'},
+  {n:'05', t:'바라는 것', d:'회사가 무엇을 해주면 좋을지'},
+  {n:'06', t:'마무리', d:'기프티콘 발송을 위한 연락처'},
+];
+const Q = [
+ {id:'A1', s:0, type:'select', t:'소속', req:1, opts:CONFIG.depts, other:'기타(직접 입력)'},
+ {id:'A2', s:0, type:'single', t:'직무 성격', req:1, opts:['사업 기획 · 운영','영업 · 고객 응대','교육 개발 · 강의','마케팅 · 홍보 · 디자인','시스템 · 개발','재무 · 인사 · 총무 · 기획','기타'], other:'기타'},
+ {id:'A3', s:0, type:'single', t:'근무 형태', req:1, opts:['컨설턴트','PA','PP','기타'], other:'기타'},
+
+ {id:'B1', s:1, type:'single', t:'지난 한 달, AI 도구를 얼마나 썼나요?', req:1, opts:['쓰지 않음','월 몇 번','주 몇 번','거의 매일','하루 여러 번']},
+ {id:'B2', s:1, type:'multi', t:'쓰는 도구', sub:'모두 선택 — 개인 계정으로 쓰는 것도 포함', req:1, showIf:{B1:'!쓰지 않음'}, groups:[
+   {g:'범용 대화형 AI', opts:['ChatGPT','Claude','Gemini','Microsoft Copilot (M365 Copilot · Copilot Chat)','Perplexity','Grok','DeepSeek','료튼','네이버 클로바X · 큐','카카오 카나나']},
+   {g:'제안서 · 문서 · 슬라이드', opts:['젠스파크 (Genspark)','감마 (Gamma)','마누스 (Manus)','NotebookLM','Skywork','미리캔버스 (미리클)','Notion AI','Napkin (도식화)','Canva AI','Gemini 캔버스 · Deep Research','ChatGPT 딥리서치 · 캔버스','Claude 프로젝트 · 아티팩트']},
+   {g:'이미지 · 영상 · 음성', opts:['Midjourney','나노바나나 (Gemini 이미지)','DALL·E · GPT 이미지','Adobe Firefly','Runway','Sora','Veo','Kling','Suno','ElevenLabs']},
+   {g:'회의 · 번역 · 요약', opts:['클로바노트','릴리스 (Lilys)','Otter','Zoom · Teams AI 회의 요약','DeepL','파파고']},
+   {g:'코딩 · 자동화 · 앱 제작', opts:['Cursor','Claude Code','GitHub Copilot','Replit · Lovable · v0 · Bolt','Make · Zapier · n8n','Power Automate · Copilot Studio','Dify · Coze']},
+   {g:'문서 도구 안의 AI', opts:['Word · Excel · PowerPoint Copilot','Google Workspace Gemini','한컴 AI · 폴라리스 AI']},
+   {g:'그 밖에', opts:['기타']}
+ ], other:'기타', otherLabel:'다른 도구 이름'},
+ {id:'B3', s:1, type:'multi', t:'계정 유형', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['무료','개인 유료 (본인 부담)','회사 제공','팀 공유 계정']},
+ {id:'B4', s:1, type:'single', t:'본인이 내는 월 비용', req:1, showIf:{B1:'!쓰지 않음'}, opts:['없음','1만 원 미만','1~3만 원','3~10만 원','10만 원 이상']},
+ {id:'B5', s:1, type:'multi', t:'주 용도', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['제안서 · 기획서 · RFP 분석','문서 · 보고서 초안','이메일 · 안내문','요약 · 정리','번역','기획 · 아이디어','데이터 정리 · 엑셀','이미지 · 디자인','영상','코드 · 자동화','고객 응대 문안','강의 · 교육 자료','기타'], other:'기타'},
+ {id:'B6', s:1, type:'single', t:'한 주에 절약되는 시간 (체감)', req:1, showIf:{B1:'!쓰지 않음'}, opts:['없음','1시간 미만','1~3시간','3~5시간','5시간 이상']},
+ {id:'B7', s:1, type:'scale', t:'결과 만족도', req:1, showIf:{B1:'!쓰지 않음'}, lo:'불만', hi:'만족'},
+ {id:'B8', s:1, type:'multi', t:'못 쓰거나 불편한 이유', sub:'모두 선택 — 잘 쓰고 있어도 걸리는 점이 있으면 골라 주세요', req:1, opts:['비용','보안 · 유출 걱정','결과 품질','사용법을 모름','회사 규칙이 불명확','필요 없음','시간이 없음','없음','기타'], other:'기타'},
+ {id:'B9', s:1, type:'multi', t:'제안서 · 기획서를 쓸 때 AI를 쓰는 단계', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['고객사 · RFP 분석','자료 조사 · 시장 분석','목차 · 구조 잡기','본문 초안 작성','슬라이드 · 디자인 생성','도표 · 도식 만들기','검토 · 교정 · 요약','번역','제안서에는 쓰지 않음']},
+ {id:'B10', s:1, type:'textarea', t:'제안서에 가장 도움이 된 도구 하나와 이유', req:0, showIf:{B1:'!쓰지 않음'}, ph:'예) 젠스파크 — 도표까지 한 번에 나와서 초안 시간이 반으로 줄었다'},
+
+ {id:'C1', s:2, type:'multi', t:'AI에 넣어 본 자료', sub:'모두 선택 · 불이익 없음, 현황 파악용', req:1, opts:['공개 자료','내부 문서 (회의록 · 기획안 · 보고서)','고객사 정보 (회사명 · 담당자)','개인정보 (이름 · 연락처 · 이메일 목록)','계약 · 금액','넣은 적 없음']},
+ {id:'C2', s:2, type:'single', t:'개인정보가 섞인 자료를 넣을 때는', req:1, opts:['그대로 넣음','이름 · 연락처를 지우고 넣음','넣지 않음','잘 모르겠음']},
+ {id:'C3', s:2, type:'single', t:'회사의 AI 사용 규칙을 알고 있나요?', req:1, opts:['규칙이 있는지 모름','있다고 들었지만 내용은 모름','알고 지키고 있음']},
+ {id:'C4', s:2, type:'single', t:'자료 등급 규칙 (공개 / 내부 / 고객 · 개인정보)이 정해지면 따를 수 있나요?', req:1, opts:['예','회사 도구가 제공되면','어렵다'], other:'어렵다', otherLabel:'어려운 이유'},
+
+ {id:'D1', s:3, type:'single', t:'업무용으로 직접 만들었거나 쓰고 있는 자동화 · 폼 · 챗봇 · 웹앱이 있나요?', req:1, opts:['없음','내가 만든 것','팀에서 만든 것','외부(개인 · 업체)가 만들어 준 것']},
+ {id:'D2', s:3, type:'multi', t:'무엇인가요?', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, opts:['신청 · 설문 폼','업무 자동화 (메일 · 알림 · 정리)','챗봇','웹페이지 · 앱','데이터 대시보드','엑셀 매크로 · 스크립트','AI 에이전트 (스스로 실행)','기타'], other:'기타'},
+ {id:'D3', s:3, type:'multi', t:'만들 때 쓴 도구 · 서비스', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, opts:['GitHub','Vercel · Netlify','Supabase · Firebase','구글 시트 · Apps Script','Notion','Make · Zapier · n8n','Power Automate · Power Apps','Replit · Lovable · v0 · Bolt','Cursor · Claude Code','Dify · Coze','개인 PC · 개인 서버','ChatGPT GPTs · Claude 프로젝트','기타'], other:'기타'},
+ {id:'D4', s:3, type:'multi', t:'거기에 들어가는 데이터', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, opts:['공개 자료','내부 문서','고객사 정보','개인정보 (이름 · 연락처 · 이메일)','결제 · 계약','데이터 없음']},
+ {id:'D5', s:3, type:'single', t:'누가 쓰나요?', req:1, showIf:{D1:'!없음'}, opts:['나만','우리 팀','다른 부서도','외부 고객 · 회원도']},
+ {id:'D6', s:3, type:'textarea', t:'이름과 용도를 한 줄씩 적어 주세요', sub:'여러 개면 줄을 바꿔서', req:0, showIf:{D1:'!없음'}, ph:'예) 행사 신청 폼 — 세미나 참가 접수'},
+ {id:'D7', s:3, type:'single', t:'회사 서버 · 표준으로 옮기자고 하면', req:1, showIf:{D1:'!없음'}, opts:['옮길 수 있음','도와주면 옮김','어렵다','없애도 됨'], other:'어렵다', otherLabel:'어려운 이유'},
+ {id:'D8', s:3, type:'multi', t:'만들 때 어려웠던 것 · 필요한 지원', sub:'모두 선택', req:0, showIf:{D1:'!없음'}, opts:['서버 · 배포','데이터베이스','로그인 · 권한','개인정보 처리','비용','시간','기술','없음']},
+
+ {id:'E1', s:4, type:'multi', t:'회사가 해주면 좋은 것', sub:'최대 3개', req:1, max:3, opts:['조직 계정 제공','비용 지원','교육','프롬프트 · 템플릿','사내 챗봇','사내 서버 · 배포 환경','규칙 · 가이드','사례 공유']},
+ {id:'E2', s:4, type:'multi', t:'배우고 싶은 주제', sub:'모두 선택', req:0, opts:['기본 사용법','문서 · 보고서','데이터 · 엑셀','이미지 · 영상','자동화','코딩','보안 · 개인정보','없음']},
+ {id:'E3', s:4, type:'single', t:'교육 형태', req:0, opts:['집합 1시간','온라인 영상','1:1 클리닉','사례 공유회']},
+ {id:'E4', s:4, type:'multi', t:'걱정되는 것', sub:'모두 선택', req:0, opts:['보안 · 유출','품질 · 오류','비용','일자리','의존','없음']},
+
+ {id:'F1', s:5, type:'single', t:'후속 인터뷰(20분)에 응할 수 있나요?', sub:'자체 제작 도구가 있는 분은 특히 부탁드립니다', req:0, opts:['예','아니오']},
+ {id:'F2_name', s:5, type:'text', t:'이름', req:1, ph:'홍길동', maxlen:20},
+ {id:'F3_phone', s:5, type:'tel', t:'휴대폰 번호', sub:'기프티콘을 받을 번호', req:1, ph:'010-0000-0000'},
+ {id:'F4_consent', s:5, type:'consent', t:'개인정보 수집 · 이용 동의', req:1, label:'기프티콘 발송을 위한 이름 · 휴대폰 번호 수집 · 이용에 동의합니다.', small:'수집 항목: 이름, 휴대폰 번호 · 이용 목적: 설문 참여 기프티콘 발송 · 보유 기간: 발송 완료 후 즉시 파기 · 동의하지 않으면 기프티콘을 받을 수 없으며, 설문 응답만 하려면 아래 담당자에게 알려 주세요.'},
+ {id:'F5_comment', s:5, type:'textarea', t:'하고 싶은 말', req:0, ph:'AI · 자동화 · 회사 지원에 대해 무엇이든'},
+];
+
+Q.forEach(q => { if (q.groups) q.opts = q.groups.flatMap(g => g.opts); });
+
+/* ───────────────────────────── 이미지(기프티콘 컵) ───────────────────────────── */
+const CUP = [
+  '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'
+].join('');
+document.querySelectorAll('img.cup').forEach(i => i.src = 'data:image/webp;base64,' + CUP);
+
+/* ───────────────────────────── 렌더 ───────────────────────────── */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const started = Date.now();
+let qNo = 0;
+
+function render(){
+  const root = $('#qs'); let html = '';
+  SECTIONS.forEach((sec, si) => {
+    html += `<section class="sec" data-s="${si}"><div class="sec-h"><span class="n">${sec.n}</span><h2>${esc(sec.t)}</h2></div><p class="sec-d">${esc(sec.d)}</p>`;
+    Q.filter(q => q.s === si).forEach(q => { html += qHtml(q); });
+    html += `</section>`;
+  });
+  root.innerHTML = html;
+  $('#chipN').textContent = qNo + '문항'; $('#giftWhen').textContent = CONFIG.giftWhen; $('#giftWhen2').textContent = CONFIG.giftWhen;
+  const c = CONFIG.contact;
+  $('#foot').innerHTML = `<b>문의</b> ${esc(c.team)} ${esc(c.name)} · 전화 ${esc(c.tel)} · 메일 ${esc(c.mail)}<br>응답 데이터는 담당 부서만 열람하며, 결과는 부서 단위로만 공유됩니다.`;
+}
+function qHtml(q){
+  const no = q.type==='consent' ? '' : `<span class="no">${++qNo}.</span>`;
+  const req = q.req ? '<span class="req">*</span>' : '';
+  const sub = q.sub ? `<p class="q-s">${esc(q.sub)}</p>` : '';
+  let body = '';
+  if (q.type==='single' || q.type==='multi'){
+    const multi = q.type==='multi';
+    const optHtml = (o,i) => `<span class="opt${multi?' chk':''}"><input type="${multi?'checkbox':'radio'}" name="${q.id}" id="${q.id}_${i}" value="${esc(o)}"><label for="${q.id}_${i}">${esc(o)}</label></span>`;
+    if (q.groups){
+      let i = 0; body = q.groups.map(g => `<div class="grp"><span class="gl">${esc(g.g)}</span><div class="opts">${g.opts.map(o => optHtml(o, i++)).join('')}</div></div>`).join('');
+    } else {
+      const col = q.opts.some(o => o.length > 14);
+      body = `<div class="opts${col?' col':''}">` + q.opts.map(optHtml).join('') + `</div>`;
+    }
+    if (q.max) body += `<p class="hint">최대 ${q.max}개 <span class="count" id="${q.id}_cnt">0 / ${q.max}</span></p>`;
+    if (q.other) body += `<div class="other in" id="${q.id}_other"><input type="text" name="${q.id}_other_text" maxlength="60" placeholder="${esc(q.otherLabel || '직접 입력')}"></div>`;
+  } else if (q.type==='scale'){
+    body = `<div class="scale">` + [1,2,3,4,5].map(v => `<span class="opt"><input type="radio" name="${q.id}" id="${q.id}_${v}" value="${v}"><label for="${q.id}_${v}">${v}</label></span>`).join('') + `</div><div class="scale-l"><span>1 ${esc(q.lo)}</span><span>5 ${esc(q.hi)}</span></div>`;
+  } else if (q.type==='select'){
+    body = `<div class="in"><select name="${q.id}"><option value="">선택하세요</option>${q.opts.map(o => `<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select></div>`;
+    if (q.other) body += `<div class="other in" id="${q.id}_other"><input type="text" name="${q.id}_other_text" maxlength="40" placeholder="소속을 적어 주세요"></div>`;
+  } else if (q.type==='text' || q.type==='tel'){
+    body = `<div class="in"><input type="${q.type}" name="${q.id}" placeholder="${esc(q.ph||'')}" ${q.maxlen?`maxlength="${q.maxlen}"`:''} autocomplete="${q.type==='tel'?'tel':'name'}" ${q.type==='tel'?'inputmode="numeric"':''}></div>`;
+  } else if (q.type==='textarea'){
+    body = `<div class="in"><textarea name="${q.id}" placeholder="${esc(q.ph||'')}" maxlength="1000"></textarea></div>`;
+  } else if (q.type==='consent'){
+    body = `<div class="consent"><span class="opt chk"><input type="checkbox" name="${q.id}" id="${q.id}_1" value="동의"><label for="${q.id}_1">${esc(q.label)}</label></span><small>${esc(q.small)}</small></div>`;
+  }
+  return `<div class="q" data-q="${q.id}" data-type="${q.type}"><p class="q-t">${no}<span>${esc(q.t)}${req}</span></p>${sub}${body}<p class="msg">${q.type==='consent'?'동의가 필요합니다':(q.type==='tel'?'휴대폰 번호를 확인해 주세요 (010-0000-0000)':'답해 주세요')}</p></div>`;
+}
+
+/* ───────────────────────────── 값 · 분기 · 진행률 ───────────────────────────── */
+function val(q){
+  const box = $(`.q[data-q="${q.id}"]`);
+  if (q.type==='single' || q.type==='scale'){ const c = $('input:checked', box); if (!c) return ''; let v = c.value; if (q.other && v===q.other){ const o = $(`[name="${q.id}_other_text"]`, box).value.trim(); v = o ? `${v}: ${o}` : v; } return v; }
+  if (q.type==='multi'){ return $$('input:checked', box).map(c => { let v = c.value; if (q.other && v===q.other){ const o = $(`[name="${q.id}_other_text"]`, box).value.trim(); v = o ? `${v}: ${o}` : v; } return v; }).join(', '); }
+  if (q.type==='select'){ let v = $('select', box).value; if (q.other && v===q.other){ const o = $(`[name="${q.id}_other_text"]`, box).value.trim(); v = o ? `${o}` : v; } return v; }
+  if (q.type==='consent'){ return $('input:checked', box) ? '동의' : ''; }
+  return $('input,textarea', box).value.trim();
+}
+function visible(q){
+  if (!q.showIf) return true;
+  return Object.entries(q.showIf).every(([k, cond]) => {
+    const v = val(Q.find(x => x.id===k));
+    return cond.startsWith('!') ? (v !== '' && v !== cond.slice(1)) : v === cond;
+  });
+}
+function refresh(){
+  let n = 0;
+  Q.forEach(q => {
+    const box = $(`.q[data-q="${q.id}"]`);
+    const vis = visible(q);
+    box.classList.toggle('hide', !vis);
+    const no = $('.no', box); if (no && vis) no.textContent = (++n) + '.';
+    if (q.other){ const on = q.type==='multi' ? $$('input:checked', box).some(c => c.value===q.other) : val(q).startsWith(q.other) || (q.type==='select' && $('select',box).value===q.other); $(`#${q.id}_other`).classList.toggle('on', on); }
+    if (q.max){ const n = $$('input:checked', box).length; $(`#${q.id}_cnt`).textContent = `${n} / ${q.max}`; $$('input', box).forEach(c => c.disabled = !c.checked && n >= q.max); }
+  });
+  const need = Q.filter(q => q.req && visible(q));
+  const done = need.filter(q => val(q) !== '').length;
+  $('#pt').textContent = `${done} / ${need.length}`;
+  $('#pb').style.width = (need.length ? Math.round(done/need.length*100) : 0) + '%';
+  saveDraft();
+}
+function fmtPhone(el){
+  let d = el.value.replace(/\D/g,'').slice(0,11);
+  if (d.length > 7) el.value = d.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3');
+  else if (d.length > 3) el.value = d.replace(/(\d{3})(\d+)/, '$1-$2');
+  else el.value = d;
+}
+function validate(){
+  let first = null;
+  Q.forEach(q => {
+    const box = $(`.q[data-q="${q.id}"]`);
+    let bad = false;
+    if (visible(q)){
+      const v = val(q);
+      if (q.req && v === '') bad = true;
+      if (q.type==='tel' && v !== '' && !/^01[016789]-?\d{3,4}-?\d{4}$/.test(v)) bad = true;
+    }
+    box.classList.toggle('err', bad);
+    if (bad && !first) first = box;
+  });
+  return first;
+}
+
+/* ───────────────────────────── 임시 저장 (브라우저 안에서만) ───────────────────────────── */
+const DK = 'kma_ai_survey_draft_' + CONFIG.version;
+function saveDraft(){ try{ const d = {}; Q.forEach(q => { const box = $(`.q[data-q="${q.id}"]`); d[q.id] = q.type==='multi' ? $$('input:checked', box).map(c=>c.value) : (q.type==='single'||q.type==='scale'||q.type==='consent') ? ($('input:checked', box)||{}).value||'' : ($('select,input,textarea', box)||{}).value||''; if (q.other) d[q.id+'_o'] = ($(`[name="${q.id}_other_text"]`, box)||{}).value||''; }); localStorage.setItem(DK, JSON.stringify(d)); }catch(e){} }
+function loadDraft(){ try{ const d = JSON.parse(localStorage.getItem(DK)||'null'); if(!d) return; Q.forEach(q => { const box = $(`.q[data-q="${q.id}"]`); const v = d[q.id]; if (v==null) return; if (q.type==='multi') $$('input', box).forEach(c => c.checked = v.includes(c.value)); else if (q.type==='single'||q.type==='scale'||q.type==='consent') $$('input', box).forEach(c => c.checked = c.value===v); else { const el = $('select,input,textarea', box); if (el) el.value = v; } if (q.other && d[q.id+'_o']) $(`[name="${q.id}_other_text"]`, box).value = d[q.id+'_o']; }); }catch(e){} }
+
+/* ───────────────────────────── 제출 ───────────────────────────── */
+async function submit(e){
+  e.preventDefault();
+  const first = validate();
+  const alert = $('#alert');
+  if (first){ alert.textContent = '아직 답하지 않은 문항이 있습니다. 표시된 곳을 확인해 주세요.'; alert.classList.add('on'); first.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+  alert.classList.remove('on');
+  const btn = $('#btn'); btn.disabled = true; btn.textContent = '보내는 중…';
+  const fd = new FormData();
+  Q.forEach(q => { const id = CONFIG.entry[q.id]; if (!id) return; fd.append('entry.' + id, visible(q) ? val(q) : ''); });
+  const secs = Math.round((Date.now() - started)/1000);
+  const dev = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'pc';
+  fd.append('entry.' + CONFIG.entry.Z, `${CONFIG.version} | ${secs}s | ${dev} | ${screen.width}x${screen.height}`);
+  fd.append('fvv', '1'); fd.append('pageHistory', '0');
+  try{
+    await fetch(CONFIG.action, {method:'POST', mode:'no-cors', body: fd});
+    try{ localStorage.removeItem(DK); }catch(_){}
+    $('#f').style.display = 'none'; $('#done').classList.add('on'); $('#pt').textContent = '완료'; $('#pb').style.width = '100%';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }catch(err){
+    btn.disabled = false; btn.textContent = '다시 보내기';
+    alert.textContent = '전송에 실패했습니다. 인터넷 연결을 확인하고 다시 눌러 주세요.'; alert.classList.add('on');
+  }
+}
+
+render(); loadDraft(); refresh();
+$('#f').addEventListener('change', refresh);
+$('#f').addEventListener('input', e => { if (e.target.type==='tel') fmtPhone(e.target); refresh(); });
+$('#f').addEventListener('submit', submit);
+$$('.q').forEach(b => b.addEventListener('change', () => b.classList.remove('err')));
+</script>
+</body>
+</html>
