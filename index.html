@@ -188,12 +188,12 @@ h1{font-size:2rem;line-height:1.18;margin:.55rem 0 .75rem;font-weight:800;letter
 <header class="head">
   <div class="eyebrow">2027 AI · 플랫폼 지원 계획 기초 조사</div>
   <h1>AI 활용 · 업무 자동화 현황 조사</h1>
-  <p class="lead">지금 누가 어떤 AI를 어떻게 쓰고 있는지 알아야 회사가 무엇을 지원할지 정할 수 있습니다. 편하게, 있는 그대로 답해 주세요.</p>
-  <div class="meta"><span class="chip">5~8분</span><span class="chip" id="chipN">문항</span><span class="chip">결과는 부서 단위 집계</span><span class="chip">☕ 완료 시 기프티콘</span></div>
+  <p class="lead">지금 누가 어떤 AI를 어떻게 쓰고 있는지 알아야 협회가 무엇을 지원할지 정할 수 있습니다. 편하게, 있는 그대로 답해 주세요.</p>
+  <div class="meta"><span class="chip">5~10분</span><span class="chip" id="chipN">문항</span><span class="chip">해당 없는 문항은 자동 생략</span><span class="chip">결과는 부서 단위 집계</span><span class="chip">☕ 완료 시 기프티콘</span></div>
 </header>
 
 <section class="intro">
-  <p><b>우리 회사는 AI와 자체 제작 도구의 자율성을 보장하고 지원하되, 데이터 자산과 개인정보 보호 · 보안을 위한 관리 계획을 세우고 있습니다.</b> 이 조사는 규제가 아니라 지원의 기준을 잡기 위한 것입니다.</p>
+  <p><b>우리 협회는 AI와 자체 제작 도구의 자율성을 보장하고 지원하되, 데이터 자산과 개인정보 보호 · 보안을 위한 관리 계획을 세우고 있습니다.</b> 이 조사는 규제가 아니라 지원의 기준을 잡기 위한 것입니다.</p>
   <ul class="promise">
     <li><b>1</b><span><b>불이익 없음</b> — 지금 어떤 도구를 어떻게 쓰든, 어떤 자료를 넣었든 이 조사로 문제 삼지 않습니다. 현황 파악이 목적입니다.</span></li>
     <li><b>2</b><span><b>부서 단위 집계</b> — 개인별 답변은 공개하지 않고 부서·직무 단위로만 집계합니다.</span></li>
@@ -232,7 +232,7 @@ const CONFIG = {
   // 응답 수신함(구글 폼) 주소 — 여기로 보낸 답이 연결된 구글 시트에 자동으로 쌓입니다
   action: 'https://docs.google.com/forms/d/e/1FAIpQLSe-HHnYCziDUgh44RjCArH3K9SC6HB1QsnVycn_Xpzh1TpwDg/formResponse',
   // 구글 폼 항목 ID
-  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "F1": 992614929, "Z": 1876301572, "F2_name": 320626572, "F3_phone": 1321200476, "F4_consent": 1300152575, "F5_comment": 702729493, "B9": 28402382, "B10": 1729038618},
+  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "F1": 992614929, "Z": 1876301572, "F2_name": 320626572, "F3_phone": 1321200476, "F4_consent": 1300152575, "F5_comment": 702729493, "B9": 28402382, "B10": 1729038618, "B3r": 706474490, "B11": 996669051, "B12": 1663256785, "D9": 513714063, "D10": 923066879, "D11": 1858804995, "D12": 1746647360, "D13": 743731728, "D14": 41827678, "B13": 1679343865, "B15": 870471339, "E5": 456555656},
   // A1 소속 — 1단계 그룹 → 2단계 본부 · 센터 · 팀 (units가 비어 있으면 1단계에서 끝)
   org: [
     {g:'미래혁신그룹', units:['AI미래교육본부','AI역량개발본부','AI창의혁신본부','역량솔루션본부','일자리창출본부','평생교육본부','글로벌교육본부','자격인증평가센터','지속가능경영센터','기업혁신파트']},
@@ -253,12 +253,12 @@ const SECTIONS = [
   {n:'02', t:'AI 사용', d:'지금 실제로 쓰는 방식 그대로'},
   {n:'03', t:'자료 취급', d:'현황 파악용 — 어떤 답이든 불이익이 없습니다'},
   {n:'04', t:'자체 제작', d:'폼·자동화·챗봇·웹앱 등 업무용으로 만든 것'},
-  {n:'05', t:'바라는 것', d:'회사가 무엇을 해주면 좋을지'},
+  {n:'05', t:'바라는 것', d:'협회가 무엇을 해주면 좋을지'},
   {n:'06', t:'마무리', d:'기프티콘 발송을 위한 연락처'},
 ];
 const Q = [
  {id:'A1', s:0, type:'org', t:'소속', sub:'그룹을 고르면 본부 · 센터 · 팀이 나옵니다', req:1, other:'기타(직접 입력)'},
- {id:'A2', s:0, type:'single', t:'직무 성격', req:1, opts:['사업 기획 · 운영','영업 · 고객 응대','교육 개발 · 강의','마케팅 · 홍보 · 디자인','시스템 · 개발','재무 · 인사 · 총무 · 기획','기타'], other:'기타'},
+ {id:'A2', s:0, type:'multi', t:'직무 성격', sub:'주로 하는 일 · 최대 2개', req:1, max:2, opts:['사업 기획 · 운영','영업 · 고객 응대','교육 개발 · 강의','마케팅 · 홍보 · 디자인','시스템 · 개발','재무 · 인사 · 총무 · 기획','기타'], other:'기타'},
  {id:'A3', s:0, type:'single', t:'근무 형태', req:1, opts:['컨설턴트','PA','PP','기타'], other:'기타'},
 
  {id:'B1', s:1, type:'single', t:'지난 한 달, AI 도구를 얼마나 썼나요?', req:1, opts:['쓰지 않음','월 몇 번','주 몇 번','거의 매일','하루 여러 번']},
@@ -271,39 +271,50 @@ const Q = [
    {g:'문서 도구 안의 AI', opts:['Word · Excel · PowerPoint Copilot','Google Workspace Gemini','한컴 AI · 폴라리스 AI']},
    {g:'그 밖에', opts:['기타']}
  ], other:'기타', otherLabel:'다른 도구 이름'},
- {id:'B3', s:1, type:'multi', t:'계정 유형', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['무료','개인 유료 (본인 부담)','회사 제공','팀 공유 계정']},
- {id:'B4', s:1, type:'single', t:'본인이 내는 월 비용', req:1, showIf:{B1:'!쓰지 않음'}, opts:['없음','1만 원 미만','1~3만 원','3~10만 원','10만 원 이상']},
- {id:'B5', s:1, type:'multi', t:'주 용도', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['제안서 · 기획서 · RFP 분석','문서 · 보고서 초안','이메일 · 안내문','요약 · 정리','번역','기획 · 아이디어','데이터 정리 · 엑셀','이미지 · 디자인','영상','코드 · 자동화','고객 응대 문안','강의 · 교육 자료','기타'], other:'기타'},
+ {id:'B3', s:1, type:'multi', t:'계정 유형', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['무료','개인 유료 (본인 부담)','협회 제공','팀 공유 계정']},
+ {id:'B3r', s:1, type:'multi', t:'개인 유료 계정을 쓰는 이유', sub:'모두 선택', req:1, showIf:{B3:'~개인 유료 (본인 부담)'}, opts:['협회 제공 계정이 없어서','협회 계정보다 좋은 모델 · 기능이 필요해서','사용량 한도가 부족해서','개인 자료 · 개인 프로젝트에도 써서','신청 · 승인 절차가 번거로워서','팀 공유 계정은 불편해서','기타'], other:'기타'},
+ {id:'B11', s:1, type:'multi', t:'본인이 유료로 결제하는 도구', sub:'모두 선택 — 도구별 개인 부담을 보기 위한 것', req:1, showIf:{B3:'~개인 유료 (본인 부담)'}, opts:['ChatGPT (Plus · Pro)','Claude (Pro · Max)','Gemini (Google AI Pro · Ultra)','Microsoft Copilot Pro','Perplexity Pro','젠스파크 (Genspark)','감마 (Gamma)','마누스 (Manus)','Midjourney','Cursor','GitHub Copilot','뤼튼','Canva Pro','Notion AI','기타'], other:'기타', otherLabel:'다른 유료 도구'},
+ {id:'B4', s:1, type:'single', t:'본인이 내는 월 비용', sub:'유료 도구 전체 합계', req:1, showIf:{B1:'!쓰지 않음'}, opts:['없음','1만 원 미만','1~3만 원','3~10만 원','10만 원 이상']},
+ {id:'B15', s:1, type:'single', t:'내는 비용에 비해 효과는', req:1, showIf:{B4:'!없음'}, opts:['비용 이상의 효과','비용과 비슷함','효과가 비용에 못 미침','잘 모르겠음']},
+ {id:'B12', s:1, type:'single', t:'협회가 계정을 제공한다면 가장 필요한 도구', sub:'한 가지만', req:1, opts:['ChatGPT','Claude','Gemini','Microsoft Copilot','Perplexity','젠스파크 (Genspark)','감마 (Gamma)','Cursor · Claude Code (개발용)','기타','필요 없음 · 모름'], other:'기타'},
+ {id:'B5', s:1, type:'multi', t:'업무 과정에서 AI를 쓰는 단계', sub:'모두 선택 — 제안 · 교육 · 운영 전 과정', req:1, showIf:{B1:'!쓰지 않음'}, opts:['고객사 · 시장 · RFP 분석','자료 조사 · 요약','기획 · 아이디어','제안서 · 보고서 초안 작성','슬라이드 · 도표 · 디자인 제작','교육 콘텐츠 · 강의 자료 제작','이메일 · 안내문 · 고객 응대 문안','데이터 정리 · 엑셀','검토 · 교정 · 번역','이미지 · 영상 제작','코드 · 자동화','기타'], other:'기타'},
  {id:'B6', s:1, type:'single', t:'한 주에 절약되는 시간 (체감)', req:1, showIf:{B1:'!쓰지 않음'}, opts:['없음','1시간 미만','1~3시간','3~5시간','5시간 이상']},
- {id:'B7', s:1, type:'scale', t:'결과 만족도', req:1, showIf:{B1:'!쓰지 않음'}, lo:'불만', hi:'만족'},
- {id:'B8', s:1, type:'multi', t:'못 쓰거나 불편한 이유', sub:'모두 선택 — 잘 쓰고 있어도 걸리는 점이 있으면 골라 주세요', req:1, opts:['비용','보안 · 유출 걱정','결과 품질','사용법을 모름','회사 규칙이 불명확','필요 없음','시간이 없음','없음','기타'], other:'기타'},
- {id:'B9', s:1, type:'multi', t:'제안서 · 기획서를 쓸 때 AI를 쓰는 단계', sub:'모두 선택', req:1, showIf:{B1:'!쓰지 않음'}, opts:['고객사 · RFP 분석','자료 조사 · 시장 분석','목차 · 구조 잡기','본문 초안 작성','슬라이드 · 디자인 생성','도표 · 도식 만들기','검토 · 교정 · 요약','번역','제안서에는 쓰지 않음']},
- {id:'B10', s:1, type:'textarea', t:'제안서에 가장 도움이 된 도구 하나와 이유', req:0, showIf:{B1:'!쓰지 않음'}, ph:'예) 젠스파크 — 도표까지 한 번에 나와서 초안 시간이 반으로 줄었다'},
+ {id:'B13', s:1, type:'scale', t:'AI로 업무 생산성이 얼마나 올랐나요?', req:1, showIf:{B1:'!쓰지 않음'}, lo:'변화 없음', hi:'크게 향상'},
+ {id:'B7', s:1, type:'scale', t:'AI 결과물이 업무 품질을 얼마나 높였나요?', req:1, showIf:{B1:'!쓰지 않음'}, lo:'도움 안 됨', hi:'크게 향상'},
+ {id:'B8', s:1, type:'multi', t:'못 쓰거나 불편한 이유', sub:'모두 선택 — 잘 쓰고 있어도 걸리는 점이 있으면 골라 주세요', req:1, excl:'없음', opts:['비용','보안 · 유출 걱정','결과 품질','사용법을 모름','협회 규칙이 불명확','필요 없음','시간이 없음','없음','기타'], other:'기타'},
+ {id:'B10', s:1, type:'textarea', t:'가장 도움이 된 도구 하나와 이유', sub:'제안서 · 기획서가 아니어도 됩니다', req:0, showIf:{B1:'!쓰지 않음'}, ph:'예) 젠스파크 — 제안서 도표까지 한 번에 나와서 초안 시간이 반으로 줄었다'},
 
- {id:'C1', s:2, type:'multi', t:'AI에 넣어 본 자료', sub:'모두 선택 · 불이익 없음, 현황 파악용', req:1, opts:['공개 자료','내부 문서 (회의록 · 기획안 · 보고서)','고객사 정보 (회사명 · 담당자)','개인정보 (이름 · 연락처 · 이메일 목록)','계약 · 금액','넣은 적 없음']},
- {id:'C2', s:2, type:'single', t:'개인정보가 섞인 자료를 넣을 때는', req:1, opts:['그대로 넣음','이름 · 연락처를 지우고 넣음','넣지 않음','잘 모르겠음']},
- {id:'C3', s:2, type:'single', t:'회사의 AI 사용 규칙을 알고 있나요?', req:1, opts:['규칙이 있는지 모름','있다고 들었지만 내용은 모름','알고 지키고 있음']},
- {id:'C4', s:2, type:'single', t:'자료 등급 규칙 (공개 / 내부 / 고객 · 개인정보)이 정해지면 따를 수 있나요?', req:1, opts:['예','회사 도구가 제공되면','어렵다'], other:'어렵다', otherLabel:'어려운 이유'},
+ {id:'C1', s:2, type:'multi', t:'AI에 넣어 본 자료', sub:'모두 선택 · 불이익 없음, 현황 파악용', req:1, excl:'넣은 적 없음', opts:['공개 자료','내부 문서 (회의록 · 기획안 · 보고서)','고객사 정보 (회사명 · 담당자)','개인정보 (이름 · 연락처 · 이메일 목록)','계약 · 금액','넣은 적 없음']},
+ {id:'C2', s:2, type:'single', t:'개인정보가 섞인 자료를 넣을 때는', req:1, opts:['그대로 넣음','이름 · 연락처를 지우고 넣음','넣지 않음','그런 자료를 넣을 일이 없었음']},
+ {id:'C3', s:2, type:'single', t:'협회의 AI 사용 규칙을 알고 있나요?', req:1, opts:['규칙이 있는지 모름','있다고 들었지만 내용은 모름','알고 지키고 있음']},
+ {id:'C4', s:2, type:'single', t:'자료 등급 규칙 (공개 / 내부 / 고객 · 개인정보)이 정해지면 따를 수 있나요?', req:1, opts:['예','협회 도구가 제공되면','어렵다'], other:'어렵다', otherLabel:'어려운 이유'},
 
- {id:'D1', s:3, type:'single', t:'업무용으로 직접 만들었거나 쓰고 있는 자동화 · 폼 · 챗봇 · 웹앱이 있나요?', req:1, opts:['없음','내가 만든 것','팀에서 만든 것','외부(개인 · 업체)가 만들어 준 것']},
+ {id:'D1', s:3, type:'multi', t:'업무용으로 직접 만들었거나 쓰고 있는 자동화 · 폼 · 챗봇 · 웹앱이 있나요?', sub:'해당하는 것 모두', req:1, excl:'없음', opts:['없음','내가 만든 것','팀에서 만든 것','외부(개인 · 업체)가 만들어 준 것']},
+ {id:'D9', s:3, type:'single', t:'운영 중인 제작물 개수', req:1, showIf:{D1:'!없음'}, opts:['1개','2~3개','4개 이상']},
  {id:'D2', s:3, type:'multi', t:'무엇인가요?', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, opts:['신청 · 설문 폼','업무 자동화 (메일 · 알림 · 정리)','챗봇','웹페이지 · 앱','데이터 대시보드','엑셀 매크로 · 스크립트','AI 에이전트 (스스로 실행)','기타'], other:'기타'},
- {id:'D3', s:3, type:'multi', t:'만들 때 쓴 도구 · 서비스', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, opts:['GitHub','Vercel · Netlify','Supabase · Firebase','구글 시트 · Apps Script','Notion','Make · Zapier · n8n','Power Automate · Power Apps','Replit · Lovable · v0 · Bolt','Cursor · Claude Code','Dify · Coze','개인 PC · 개인 서버','ChatGPT GPTs · Claude 프로젝트','기타'], other:'기타'},
- {id:'D4', s:3, type:'multi', t:'거기에 들어가는 데이터', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, opts:['공개 자료','내부 문서','고객사 정보','개인정보 (이름 · 연락처 · 이메일)','결제 · 계약','데이터 없음']},
+ {id:'D3', s:3, type:'multi', t:'만들 때 쓴 도구', sub:'모두 선택 — 무엇으로 만들었는지', req:1, showIf:{D1:'!없음'}, opts:['Cursor · Claude Code','Replit · Lovable · v0 · Bolt','ChatGPT GPTs · Claude 프로젝트','Make · Zapier · n8n','Power Automate · Power Apps','Dify · Coze','구글 Apps Script','엑셀 VBA · 파이썬 등 직접 코딩','구글 폼 · 노션 등 서비스 기본 기능','기타'], other:'기타'},
+ {id:'D10', s:3, type:'multi', t:'실행 · 배포되는 곳', sub:'모두 선택 — 어디서 돌아가는지', req:1, showIf:{D1:'!없음'}, opts:['개인 PC','개인 서버 · NAS','Vercel · Netlify · GitHub Pages','구글 계정 안 (Apps Script · 시트)','Make · Zapier 등 서비스 안에서 실행','협회 서버 · 협회 계정','모름','기타'], other:'기타'},
+ {id:'D11', s:3, type:'multi', t:'데이터가 저장되는 곳', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, excl:'저장하지 않음', opts:['구글 시트 · 드라이브','PC의 엑셀 · 파일','Supabase · Firebase 등 DB','Notion','서비스 안에만 있음','저장하지 않음','모름']},
+ {id:'D12', s:3, type:'multi', t:'코드 · 설정 파일을 보관하는 곳', sub:'모두 선택 — 담당자가 바뀌거나 오류가 났을 때 고칠 수 있는지 보기 위한 것', req:1, showIf:{D1:'!없음'}, opts:['개인 PC','개인 클라우드 (구글 드라이브 등)','GitHub 등 저장소','제작 서비스 안에만 있음','따로 보관하지 않음','모름']},
+ {id:'D4', s:3, type:'multi', t:'거기에 들어가는 데이터', sub:'모두 선택', req:1, showIf:{D1:'!없음'}, excl:'데이터 없음', opts:['공개 자료','내부 문서','고객사 정보','개인정보 (이름 · 연락처 · 이메일)','결제 · 계약','데이터 없음']},
  {id:'D5', s:3, type:'single', t:'누가 쓰나요?', req:1, showIf:{D1:'!없음'}, opts:['나만','우리 팀','다른 부서도','외부 고객 · 회원도']},
+ {id:'D13', s:3, type:'single', t:'오류가 나거나 고쳐야 할 때는', req:1, showIf:{D1:'!없음'}, opts:['직접 고침','AI에 물어서 고침','만든 사람 · 외부에 부탁','못 고치고 그대로 둠','아직 문제가 없었음']},
+ {id:'D14', s:3, type:'single', t:'만든 사람이 없을 때 대신 관리할 수 있는 사람', req:1, showIf:{D1:'!없음', D5:'!나만'}, opts:['팀 안에 있음','다른 부서 · 외부에 있음','없음']},
  {id:'D6', s:3, type:'textarea', t:'이름과 용도를 한 줄씩 적어 주세요', sub:'여러 개면 줄을 바꿔서', req:0, showIf:{D1:'!없음'}, ph:'예) 행사 신청 폼 — 세미나 참가 접수'},
- {id:'D7', s:3, type:'single', t:'회사 서버 · 표준으로 옮기자고 하면', req:1, showIf:{D1:'!없음'}, opts:['옮길 수 있음','도와주면 옮김','어렵다','없애도 됨'], other:'어렵다', otherLabel:'어려운 이유'},
- {id:'D8', s:3, type:'multi', t:'만들 때 어려웠던 것 · 필요한 지원', sub:'모두 선택', req:0, showIf:{D1:'!없음'}, opts:['서버 · 배포','데이터베이스','로그인 · 권한','개인정보 처리','비용','시간','기술','없음']},
+ {id:'D7', s:3, type:'single', t:'협회 서버 · 표준으로 옮기자고 하면', req:1, showIf:{D1:'!없음'}, opts:['옮길 수 있음','도와주면 옮김','어렵다','없애도 됨'], other:'어렵다', otherLabel:'어려운 이유'},
+ {id:'D8', s:3, type:'multi', t:'만들 때 어려웠던 것 · 필요한 지원', sub:'모두 선택', req:0, showIf:{D1:'!없음'}, excl:'없음', opts:['서버 · 배포','데이터베이스','로그인 · 권한','개인정보 처리','비용','시간','기술','없음']},
 
- {id:'E1', s:4, type:'multi', t:'회사가 해주면 좋은 것', sub:'최대 3개', req:1, max:3, opts:['조직 계정 제공','비용 지원','교육','프롬프트 · 템플릿','사내 챗봇','사내 서버 · 배포 환경','규칙 · 가이드','사례 공유']},
- {id:'E2', s:4, type:'multi', t:'배우고 싶은 주제', sub:'모두 선택', req:0, opts:['기본 사용법','문서 · 보고서','데이터 · 엑셀','이미지 · 영상','자동화','코딩','보안 · 개인정보','없음']},
- {id:'E3', s:4, type:'single', t:'교육 형태', req:0, opts:['집합 1시간','온라인 영상','1:1 클리닉','사례 공유회']},
- {id:'E4', s:4, type:'multi', t:'걱정되는 것', sub:'모두 선택', req:0, opts:['보안 · 유출','품질 · 오류','비용','일자리','의존','없음']},
+ {id:'E1', s:4, type:'multi', t:'협회가 해주면 좋은 것', sub:'최대 3개', req:1, max:3, opts:['조직 계정 제공','비용 지원','교육','프롬프트 · 템플릿','사내 챗봇','사내 서버 · 배포 환경','규칙 · 가이드','사례 공유']},
+ {id:'E2', s:4, type:'multi', t:'배우고 싶은 주제', sub:'모두 선택', req:0, excl:'없음', opts:['기본 사용법','문서 · 보고서','데이터 · 엑셀','이미지 · 영상','자동화','코딩','보안 · 개인정보','없음','기타'], other:'기타', otherLabel:'배우고 싶은 주제'},
+ {id:'E3', s:4, type:'multi', t:'선호하는 교육 형태', sub:'모두 선택', req:0, opts:['오프라인 집합 교육','온라인 영상','1:1 클리닉','사례 공유회']},
+ {id:'E5', s:4, type:'textarea', t:'AI로 줄이고 싶은 반복 업무', sub:'지금은 사람이 하고 있지만 AI가 대신하면 좋을 일', req:0, ph:'예) 교육 후 만족도 결과를 엑셀로 정리해 보고서 양식에 옮기는 일'},
+ {id:'E4', s:4, type:'multi', t:'협회 차원에서 대비해야 할 위험', sub:'모두 선택 — 개인의 불편이 아니라 협회가 관리해야 할 것', req:0, excl:'없음', opts:['개인정보 · 내부 자료 유출','잘못된 답변(오류 · 환각)으로 인한 실수','저작권 · 라이선스','비용 증가','개인 계정 난립 · 관리 불가','직무 대체 불안','AI 의존으로 역량 저하','없음']},
 
  {id:'F1', s:5, type:'single', t:'후속 인터뷰(20분)에 응할 수 있나요?', sub:'자체 제작 도구가 있는 분은 특히 부탁드립니다', req:0, opts:['예','아니오']},
  {id:'F2_name', s:5, type:'text', t:'이름', req:1, ph:'홍길동', maxlen:20},
  {id:'F3_phone', s:5, type:'tel', t:'휴대폰 번호', sub:'기프티콘을 받을 번호', req:1, ph:'010-0000-0000'},
  {id:'F4_consent', s:5, type:'consent', t:'개인정보 수집 · 이용 동의', req:1, label:'기프티콘 발송을 위한 이름 · 휴대폰 번호 수집 · 이용에 동의합니다.', small:'수집 항목: 이름, 휴대폰 번호 · 이용 목적: 설문 참여 기프티콘 발송 · 보유 기간: 발송 완료 후 즉시 파기 · 동의하지 않으면 기프티콘을 받을 수 없으며, 설문 응답만 하려면 아래 담당자에게 알려 주세요.'},
- {id:'F5_comment', s:5, type:'textarea', t:'하고 싶은 말', req:0, ph:'AI · 자동화 · 회사 지원에 대해 무엇이든'},
+ {id:'F5_comment', s:5, type:'textarea', t:'하고 싶은 말', req:0, ph:'AI · 자동화 · 협회 지원에 대해 무엇이든'},
 ];
 
 Q.forEach(q => { if (q.groups) q.opts = q.groups.flatMap(g => g.opts); });
@@ -452,7 +463,7 @@ function render(){
     html += `</section>`;
   });
   root.innerHTML = html;
-  $('#chipN').textContent = qNo + '문항'; $('#giftWhen').textContent = CONFIG.giftWhen; $('#giftWhen2').textContent = CONFIG.giftWhen;
+  $('#chipN').textContent = '최대 ' + qNo + '문항'; $('#giftWhen').textContent = CONFIG.giftWhen; $('#giftWhen2').textContent = CONFIG.giftWhen;
   const c = CONFIG.contact;
   $('#foot').innerHTML = `<b>문의</b> ${esc(c.team)} ${esc(c.name)} · 전화 ${esc(c.tel)} · 메일 ${esc(c.mail)}<br>응답 데이터는 담당 부서만 열람하며, 결과는 부서 단위로만 공유됩니다.`;
 }
@@ -500,6 +511,7 @@ function visible(q){
   if (!q.showIf) return true;
   return Object.entries(q.showIf).every(([k, cond]) => {
     const v = val(Q.find(x => x.id===k));
+    if (cond.startsWith('~')) return v.split(', ').includes(cond.slice(1));
     return cond.startsWith('!') ? (v !== '' && v !== cond.slice(1)) : v === cond;
   });
 }
@@ -583,7 +595,13 @@ let ticking = false;
 function curSec(){ ticking = false; let cur = null; secs.forEach(s => { if (!s.classList.contains('hide') && s.getBoundingClientRect().top <= 96) cur = s; }); $('#cur').textContent = cur ? cur.dataset.label : ''; }
 addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(curSec); } }, {passive:true});
 curSec();
-$('#f').addEventListener('change', refresh);
+$('#f').addEventListener('change', e => {
+  const box = e.target.closest('.q'); const q = box && Q.find(x => x.id === box.dataset.q);
+  if (q && q.excl && e.target.type === 'checkbox' && e.target.checked){
+    $$('input', box).forEach(c => { if (e.target.value === q.excl ? c !== e.target : c.value === q.excl) c.checked = false; });
+  }
+  refresh();
+});
 $('#f').addEventListener('input', e => { if (e.target.type==='tel') fmtPhone(e.target); refresh(); });
 $('#f').addEventListener('submit', submit);
 $$('.q').forEach(b => b.addEventListener('change', () => b.classList.remove('err')));
