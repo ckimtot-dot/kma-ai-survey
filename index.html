@@ -477,8 +477,8 @@ function refresh(){
     if (q.other){ const on = q.type==='multi' ? $$('input:checked', box).some(c => c.value===q.other) : (q.type==='org' ? $(`[name="${q.id}_g"]`, box).value===q.other : val(q).startsWith(q.other)); $(`#${q.id}_other`).classList.toggle('on', on); }
     if (q.max){ const n = $$('input:checked', box).length; $(`#${q.id}_cnt`).textContent = `${n} / ${q.max}`; $$('input', box).forEach(c => c.disabled = !c.checked && n >= q.max); }
   });
-  const total = Q.length;
-  const done = Q.filter(q => !visible(q) || val(q) !== '').length;
+  const total = Q.filter(visible).length;
+  const done = Q.filter(q => visible(q) && val(q) !== '').length;
   $('#pt').textContent = `${done} / ${total}`;
   $('#pb').style.width = Math.round(done/total*100) + '%';
   saveDraft();
