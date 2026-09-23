@@ -11,7 +11,7 @@
   --mint:#2ccad3; --mint-d:#22b3bb; --mint-l:#e6f8f9; --mint-glow:rgba(44,202,211,.28);
   --ink:#111111; --ink2:#333333; --txt:#444444; --mut:#777777; --soft:#9b9b9b; --pill:#8f8f8f;
   --line:#e7e7e7; --line2:#dcdcdc; --bg:#f6f6f6; --box:#eeeeee; --card:#ffffff;
-  --pink:#f0506e; --pink-l:#fa979c; --blue:#4152a8; --yellow:#f5e83c; --sbux:#1f6a4b;
+  --pink:#f0506e; --pink-l:#fa979c; --blue:#4152a8; --yellow:#f5e83c;
   --err:#e0405e; --err-bg:#fff2f5;
   --w:720px; --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -65,15 +65,12 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 .bd5{left:6%;top:70%;width:.8rem;height:.8rem;border:.22rem solid var(--blue);background:transparent}
 @media(min-width:1100px){.bd{display:block}}
 
-/* ── 감사 · 기프티콘 ─────────────────────── */
+/* ── 인사 · 취지 ─────────────────────────── */
 .thanks{text-align:center;margin:0 0 1.9rem}
 .thanks p{margin:0}
 .thanks .t1{font-size:.92rem;color:var(--txt);margin-bottom:.35rem}
 .thanks .t2{font-size:.98rem;color:var(--ink2);line-height:1.9}
-.thanks .box{display:inline-block;padding:0 .45rem;border:1.5px solid var(--ink);border-radius:5px;line-height:1.55;font-weight:700;margin:0 .1rem}
-.thanks .sb{color:var(--sbux);font-weight:800}
-.thanks img{width:5rem;height:5rem;object-fit:contain;margin:1rem auto .55rem;filter:drop-shadow(0 8px 12px rgba(0,0,0,.1))}
-.thanks .t3{font-size:.8rem;color:var(--mut)}
+.thanks .t2 b{color:var(--ink);font-weight:800}
 
 /* ── 안내 상자 ───────────────────────────── */
 .notice{background:var(--box);border-radius:14px;padding:1.2rem 1.35rem 1.25rem;margin:0 0 1.6rem}
@@ -142,14 +139,6 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 .hint{margin:.55rem 0 0;font-size:.78rem;color:var(--soft)}
 .count{font-size:.78rem;color:var(--mint-d);margin-left:.4rem;font-weight:700;font-variant-numeric:tabular-nums}
 
-/* 동의 */
-.consent{padding:1rem 1.1rem;border-radius:14px;background:var(--box)}
-.consent .opt label{width:100%;justify-content:flex-start;text-align:left;border:0;background:transparent;padding:0;border-radius:0;align-items:flex-start;font-size:.9rem;min-height:0;font-weight:600;color:var(--ink2);gap:.6rem}
-.consent .opt label:before{content:"";flex:0 0 auto;width:1.15rem;height:1.15rem;margin-top:.12rem;border:1.5px solid #c9c9c9;border-radius:.35rem;background:#fff;transition:all .15s var(--ease)}
-.consent .opt label:hover{color:var(--ink)}
-.consent .opt input:checked+label{background:transparent;color:var(--ink);box-shadow:none}
-.consent .opt input:checked+label:before{border-color:var(--mint);background:var(--mint) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.5l3 3 6-6'/></svg>") center/80% no-repeat}
-.consent small{display:block;margin:.6rem 0 0 1.75rem;color:var(--mut);font-size:.78rem;line-height:1.55}
 
 /* ── 제출 ────────────────────────────────── */
 .submit{background:var(--card);border-radius:24px;box-shadow:0 8px 28px rgba(0,0,0,.05);padding:2rem 2.1rem 1.7rem;text-align:center}
@@ -167,7 +156,6 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 .done .ok{width:4rem;height:4rem;border-radius:50%;background:var(--mint);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.7rem;font-weight:800;box-shadow:0 0 0 8px var(--mint-glow)}
 .done h2{margin:0 0 .5rem;font-size:1.5rem;letter-spacing:-.02em;font-weight:800}
 .done p{color:var(--mut);margin:.25rem 0}
-.done .thanks{margin:1.6rem 0 0}
 
 /* ── 푸터 (민트 띠) ───────────────────────── */
 .foot{background:var(--mint);color:#fff;padding:2.2rem 1rem 2rem;font-size:.8rem;line-height:1.8}
@@ -232,9 +220,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 
 <section class="thanks">
   <p class="t1">설문에 참여해 주셔서 감사합니다.</p>
-  <p class="t2">끝까지 응답하신 <span class="box">모든 분</span>께 <b class="sb">스타벅스 아메리카노</b> 기프티콘을 선물로 보내드립니다.</p>
-  <img class="cup" alt="">
-  <p class="t3">마지막에 적어 주신 휴대폰 번호로 보내드립니다. <span id="giftWhen"></span></p>
+  <p class="t2">지금 누가 어떤 AI를 어떻게 쓰고 있는지 알아야 협회가 무엇을 지원할지 정할 수 있습니다.<br><b>이름 · 연락처는 받지 않는 익명 조사</b>이니 편하게, 있는 그대로 답해 주세요.</p>
 </section>
 
 <section class="notice">
@@ -242,8 +228,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
   <ul>
     <li>우리 협회는 AI와 자체 제작 도구의 자율성을 보장하고 지원하되, 데이터 자산과 개인정보 보호 · 보안을 위한 관리 계획을 세우고 있습니다. 이 조사는 규제가 아니라 <b>지원의 기준</b>을 잡기 위한 것입니다.</li>
     <li><b>불이익 없음</b> — 지금 어떤 도구를 어떻게 쓰든, 어떤 자료를 넣었든 이 조사로 문제 삼지 않습니다. 현황 파악이 목적입니다.</li>
-    <li><b>부서 단위 집계</b> — 개인별 답변은 공개하지 않고 부서 · 직무 단위로만 집계합니다.</li>
-    <li><b>이름 · 휴대폰 번호는 기프티콘 발송에만</b> — 응답 내용과 분리해 보관하고, 발송이 끝나면 파기합니다.</li>
+    <li><b>익명 · 부서 단위 집계</b> — 이름 · 연락처는 받지 않으며, 개인별 답변은 공개하지 않고 소속 · 직무 단위로만 집계합니다.</li>
     <li>해당 없는 문항은 자동으로 건너뜁니다. 제출 후에는 수정할 수 없으니 끝까지 확인해 주세요.</li>
   </ul>
 </section>
@@ -253,7 +238,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 <div class="submit">
   <div class="alert" id="alert"></div>
   <button class="btn" type="submit" id="btn">제출하기</button>
-  <p class="note">제출 후에는 수정할 수 없습니다 · 이름 · 휴대폰 번호는 기프티콘 발송 후 파기</p>
+  <p class="note">제출 후에는 수정할 수 없습니다 · 응답은 익명으로 저장됩니다</p>
 </div>
 
 </form>
@@ -262,11 +247,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
   <div class="ok">✓</div>
   <h2>제출되었습니다. 고맙습니다!</h2>
   <p>답해 주신 내용은 2027년 AI · 플랫폼 지원 계획에 그대로 반영됩니다.</p>
-  <div class="thanks">
-    <p class="t2"><b class="sb">스타벅스 아메리카노</b> 기프티콘을 보내드립니다.</p>
-    <img class="cup" alt="">
-    <p class="t3">적어 주신 휴대폰 번호로 보내드립니다. <span id="giftWhen2"></span></p>
-  </div>
+  <p>결과는 정리되는 대로 부서 단위로 공유하겠습니다.</p>
 </div>
 
 </div>
@@ -277,11 +258,11 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 <script>
 /* ───────────────────────────── 설정 — 여기만 고치면 됩니다 ───────────────────────────── */
 const CONFIG = {
-  version: 'v1',
+  version: 'v2',   // 익명 설문 (이름 · 연락처 미수집)
   // 응답 수신함(구글 폼) 주소 — 여기로 보낸 답이 연결된 구글 시트에 자동으로 쌓입니다
   action: 'https://docs.google.com/forms/d/e/1FAIpQLSe-HHnYCziDUgh44RjCArH3K9SC6HB1QsnVycn_Xpzh1TpwDg/formResponse',
   // 구글 폼 항목 ID
-  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "F1": 992614929, "Z": 1876301572, "F2_name": 320626572, "F3_phone": 1321200476, "F4_consent": 1300152575, "F5_comment": 702729493, "B9": 28402382, "B10": 1729038618, "B3r": 706474490, "B11": 996669051, "B12": 1663256785, "D9": 513714063, "D10": 923066879, "D11": 1858804995, "D12": 1746647360, "D13": 743731728, "D14": 41827678, "B13": 1679343865, "B15": 870471339, "E5": 456555656, "D15": 772006813},
+  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "Z": 1876301572, "F5_comment": 702729493, "B10": 1729038618, "B3r": 706474490, "B11": 996669051, "B12": 1663256785, "D9": 513714063, "D10": 923066879, "D11": 1858804995, "D12": 1746647360, "D13": 743731728, "D14": 41827678, "B13": 1679343865, "B15": 870471339, "E5": 456555656, "D15": 772006813},
   // A1 소속 — 1단계 그룹 → 2단계 본부 · 센터 · 팀 (units가 비어 있으면 1단계에서 끝)
   org: [
     {g:'미래혁신그룹', units:['AI미래교육본부','AI역량개발본부','AI창의혁신본부','역량솔루션본부','일자리창출본부','평생교육본부','글로벌교육본부','자격인증평가센터','지속가능경영센터','기업혁신파트']},
@@ -292,7 +273,6 @@ const CONFIG = {
     {g:'RM팀', units:[]},
     {g:'기타(직접 입력)', units:[]},
   ],
-  giftWhen: '설문 마감 후 순차 발송 예정입니다.',   // 발송 시점 문구
   contact: { team: '마케팅팀', name: '김찬규', tel: '292', mail: 'kck@kma.or.kr' },   // tel = 내선
 };
 
@@ -303,7 +283,7 @@ const SECTIONS = [
   {n:'03', t:'자료 취급', d:'현황 파악용 — 어떤 답이든 불이익이 없습니다'},
   {n:'04', t:'자체 제작', d:'폼·자동화·챗봇·웹앱 등 업무용으로 만든 것'},
   {n:'05', t:'바라는 것', d:'협회가 무엇을 해주면 좋을지'},
-  {n:'06', t:'마무리', d:'기프티콘 발송을 위한 연락처'},
+  {n:'06', t:'마무리', d:'하고 싶은 말이 있으면 자유롭게'},
 ];
 const Q = [
  {id:'A1', s:0, type:'org', t:'소속', sub:'그룹을 고르면 본부 · 센터 · 팀이 나옵니다', req:1, other:'기타(직접 입력)'},
@@ -360,142 +340,10 @@ const Q = [
  {id:'E5', s:4, type:'textarea', t:'AI로 줄이고 싶은 반복 업무', sub:'지금은 사람이 하고 있지만 AI가 대신하면 좋을 일', req:0, ph:'예) 교육 후 만족도 결과를 엑셀로 정리해 보고서 양식에 옮기는 일'},
  {id:'E4', s:4, type:'multi', t:'협회 차원에서 대비해야 할 위험', sub:'모두 선택 — 개인의 불편이 아니라 협회가 관리해야 할 것', req:0, excl:'없음', opts:['개인정보 · 내부 자료 유출','잘못된 답변(오류 · 환각)으로 인한 실수','저작권 · 라이선스','비용 증가','개인 계정 난립 · 관리 불가','직무 대체 불안','AI 의존으로 역량 저하','없음']},
 
- {id:'F1', s:5, type:'single', t:'후속 인터뷰(20분)에 응할 수 있나요?', sub:'자체 제작 도구가 있는 분은 특히 부탁드립니다', req:0, opts:['예','아니오']},
- {id:'F2_name', s:5, type:'text', t:'이름', req:1, ph:'홍길동', maxlen:20},
- {id:'F3_phone', s:5, type:'tel', t:'휴대폰 번호', sub:'기프티콘을 받을 번호', req:1, ph:'010-0000-0000'},
- {id:'F4_consent', s:5, type:'consent', t:'개인정보 수집 · 이용 동의', req:1, label:'기프티콘 발송을 위한 이름 · 휴대폰 번호 수집 · 이용에 동의합니다.', small:'수집 항목: 이름, 휴대폰 번호 · 이용 목적: 설문 참여 기프티콘 발송 · 보유 기간: 발송 완료 후 즉시 파기 · 동의하지 않으면 기프티콘을 받을 수 없으며, 설문 응답만 하려면 아래 담당자에게 알려 주세요.'},
- {id:'F5_comment', s:5, type:'textarea', t:'하고 싶은 말', req:0, ph:'AI · 자동화 · 협회 지원에 대해 무엇이든'},
+ {id:'F5_comment', s:5, type:'textarea', t:'하고 싶은 말', sub:'AI · 자동화 · 협회 지원에 대해 무엇이든', req:0, ph:'예) 팀 공용 계정을 만들어 주면 좋겠다 / 자체 제작 도구를 소개하고 싶다'},
 ];
 
 Q.forEach(q => { if (q.groups) q.opts = q.groups.flatMap(g => g.opts); });
-
-/* ───────────────────────────── 이미지(기프티콘 컵) ───────────────────────────── */
-const CUP = [
-  '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'
-].join('');
-document.querySelectorAll('img.cup').forEach(i => i.src = 'data:image/webp;base64,' + CUP);
 
 /* ───────────────────────────── 렌더 ───────────────────────────── */
 document.documentElement.classList.add('js');
@@ -513,7 +361,7 @@ function render(){
     html += `</section>`;
   });
   root.innerHTML = html;
-  $('#chipN').textContent = '최대 ' + qNo + '문항'; $('#giftWhen').textContent = CONFIG.giftWhen; $('#giftWhen2').textContent = CONFIG.giftWhen;
+  $('#chipN').textContent = '최대 ' + qNo + '문항';
   const c = CONFIG.contact;
   $('#foot').innerHTML = `<div class="in"><div class="fb">KMA 한국능률협회 · ${esc(c.team)}</div><div class="fl"><span>문의 : ${esc(c.name)}</span><span>내선 : ${esc(c.tel)}</span><span>이메일 : <a href="mailto:${esc(c.mail)}">${esc(c.mail)}</a></span></div><p class="fn">응답 데이터는 담당 부서만 열람하며, 결과는 부서 단위로만 집계 · 공유됩니다.</p><p class="fc">© KMA 한국능률협회</p></div>`;
 }
