@@ -41,7 +41,9 @@ img{display:block}
 .eyebrow{display:inline-block;font-size:.74rem;font-weight:700;color:var(--soft);letter-spacing:.12em;margin-bottom:1rem}
 h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spacing:-.03em;color:var(--mint)}
 .tag{margin:0 0 1.35rem;font-size:1.25rem;font-weight:800;color:var(--ink);letter-spacing:-.02em}
-.badge{display:inline-flex;align-items:center;gap:.7rem;padding:.5rem 1.15rem;border-radius:99px;background:#cacaca;color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.01em}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.badge{display:inline-flex;align-items:center;gap:.7rem;padding:.5rem 1.15rem;border-radius:99px;background:#cacaca;color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.01em;white-space:nowrap}
+.badge.p{background:var(--mint)}
 .badge i{display:inline-block;width:1px;height:.9em;background:rgba(255,255,255,.55)}
 .badge span{font-weight:600}
 /* 장식 */
@@ -208,7 +210,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
     <div class="eyebrow">2027 AI · 플랫폼 지원 계획 기초 조사</div>
     <h1>AI 활용 · 업무 자동화<br>현황 조사</h1>
     <p class="tag">쓰는 대로, 느낀 대로, 있는 그대로 체크</p>
-    <div class="badge"><b>소요 시간</b><i></i><span>5~10분 · <span id="chipN">문항</span></span></div>
+    <div class="badges"><div class="badge p"><b>참여 기간</b><i></i><span id="periodN"></span></div><div class="badge"><b>소요 시간</b><i></i><span>5~10분 · <span id="chipN">문항</span></span></div></div>
   </div>
 </header>
 
@@ -220,7 +222,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 
 <section class="thanks">
   <p class="t1">설문에 참여해 주셔서 감사합니다.</p>
-  <p class="t2">지금 누가 어떤 AI를 어떻게 쓰고 있는지 알아야 협회가 무엇을 지원할지 정할 수 있습니다.<br><b>이름 · 연락처는 받지 않는 익명 조사</b>이니 편하게, 있는 그대로 답해 주세요.</p>
+  <p class="t2">지금 누가 어떤 AI를 어떻게 쓰고 있는지 알아야 협회가 무엇을 지원할지 정할 수 있습니다.<br><b>이름 · 연락처를 묻지 않는 익명 조사</b>이니 편하게, 있는 그대로 답해 주세요.</p>
 </section>
 
 <section class="notice">
@@ -228,8 +230,8 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
   <ul>
     <li>우리 협회는 AI와 자체 제작 도구의 자율성을 보장하고 지원하되, 데이터 자산과 개인정보 보호 · 보안을 위한 관리 계획을 세우고 있습니다. 이 조사는 규제가 아니라 <b>지원의 기준</b>을 잡기 위한 것입니다.</li>
     <li><b>불이익 없음</b> — 지금 어떤 도구를 어떻게 쓰든, 어떤 자료를 넣었든 이 조사로 문제 삼지 않습니다. 현황 파악이 목적입니다.</li>
-    <li><b>익명 · 부서 단위 집계</b> — 이름 · 연락처는 받지 않으며, 개인별 답변은 공개하지 않고 소속 · 직무 단위로만 집계합니다.</li>
-    <li>해당 없는 문항은 자동으로 건너뜁니다. 제출 후에는 수정할 수 없으니 끝까지 확인해 주세요.</li>
+    <li><b>익명 · 부서 단위 집계</b> — 이름 · 연락처는 묻지 않으며(마지막 인터뷰 지원란만 원하는 분이 선택 입력), 개인별 답변은 공개하지 않고 소속 · 직무 단위로만 집계합니다.</li>
+    <li><b>참여 기간</b> — <span id="periodN2"></span>. 해당 없는 문항은 자동으로 건너뛰고, 제출 후에는 수정할 수 없습니다.</li>
   </ul>
 </section>
 
@@ -238,7 +240,7 @@ h1{font-size:2.6rem;line-height:1.15;margin:0 0 .9rem;font-weight:900;letter-spa
 <div class="submit">
   <div class="alert" id="alert"></div>
   <button class="btn" type="submit" id="btn">제출하기</button>
-  <p class="note">제출 후에는 수정할 수 없습니다 · 응답은 익명으로 저장됩니다</p>
+  <p class="note">제출 후에는 수정할 수 없습니다</p>
 </div>
 
 </form>
@@ -262,7 +264,7 @@ const CONFIG = {
   // 응답 수신함(구글 폼) 주소 — 여기로 보낸 답이 연결된 구글 시트에 자동으로 쌓입니다
   action: 'https://docs.google.com/forms/d/e/1FAIpQLSe-HHnYCziDUgh44RjCArH3K9SC6HB1QsnVycn_Xpzh1TpwDg/formResponse',
   // 구글 폼 항목 ID
-  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "Z": 1876301572, "F5_comment": 702729493, "B10": 1729038618, "B3r": 706474490, "B11": 996669051, "B12": 1663256785, "D9": 513714063, "D10": 923066879, "D11": 1858804995, "D12": 1746647360, "D13": 743731728, "D14": 41827678, "B13": 1679343865, "B15": 870471339, "E5": 456555656, "D15": 772006813},
+  entry: {"A1": 820562151, "A2": 20593021, "A3": 1625612032, "B1": 1096435100, "B2": 1017850810, "B3": 1593472742, "B4": 117548696, "B5": 512581617, "B6": 1436317285, "B7": 137317131, "B8": 183284150, "C1": 573241624, "C2": 1609983892, "C3": 1281797321, "C4": 1028296025, "D1": 2146127726, "D2": 95382640, "D3": 1920872886, "D4": 1753641713, "D5": 1476824818, "D6": 383916970, "D7": 885244516, "D8": 2051637247, "E1": 855225356, "E2": 233075422, "E3": 1305398985, "E4": 1862438037, "Z": 1876301572, "F5_comment": 702729493, "B10": 1729038618, "B3r": 706474490, "B11": 996669051, "B12": 1663256785, "D9": 513714063, "D10": 923066879, "D11": 1858804995, "D12": 1746647360, "D13": 743731728, "D14": 41827678, "B13": 1679343865, "B15": 870471339, "E5": 456555656, "D15": 772006813, "F6_interview": 1302379090},
   // A1 소속 — 1단계 그룹 → 2단계 본부 · 센터 · 팀 (units가 비어 있으면 1단계에서 끝)
   org: [
     {g:'미래혁신그룹', units:['AI미래교육본부','AI역량개발본부','AI창의혁신본부','역량솔루션본부','일자리창출본부','평생교육본부','글로벌교육본부','자격인증평가센터','지속가능경영센터','기업혁신파트']},
@@ -273,6 +275,7 @@ const CONFIG = {
     {g:'RM팀', units:[]},
     {g:'기타(직접 입력)', units:[]},
   ],
+  period: '9월 28일(월) ~ 10월 2일(금)',   // 참여 기간 문구
   contact: { team: '마케팅팀', name: '김찬규', tel: '292', mail: 'kck@kma.or.kr' },   // tel = 내선
 };
 
@@ -283,7 +286,7 @@ const SECTIONS = [
   {n:'03', t:'자료 취급', d:'현황 파악용 — 어떤 답이든 불이익이 없습니다'},
   {n:'04', t:'자체 제작', d:'폼·자동화·챗봇·웹앱 등 업무용으로 만든 것'},
   {n:'05', t:'바라는 것', d:'협회가 무엇을 해주면 좋을지'},
-  {n:'06', t:'마무리', d:'하고 싶은 말이 있으면 자유롭게'},
+  {n:'06', t:'마무리', d:'인터뷰 지원 · 하고 싶은 말'},
 ];
 const Q = [
  {id:'A1', s:0, type:'org', t:'소속', sub:'그룹을 고르면 본부 · 센터 · 팀이 나옵니다', req:1, other:'기타(직접 입력)'},
@@ -340,6 +343,7 @@ const Q = [
  {id:'E5', s:4, type:'textarea', t:'AI로 줄이고 싶은 반복 업무', sub:'지금은 사람이 하고 있지만 AI가 대신하면 좋을 일', req:0, ph:'예) 교육 후 만족도 결과를 엑셀로 정리해 보고서 양식에 옮기는 일'},
  {id:'E4', s:4, type:'multi', t:'협회 차원에서 대비해야 할 위험', sub:'모두 선택 — 개인의 불편이 아니라 협회가 관리해야 할 것', req:0, excl:'없음', opts:['개인정보 · 내부 자료 유출','잘못된 답변(오류 · 환각)으로 인한 실수','저작권 · 라이선스','비용 증가','개인 계정 난립 · 관리 불가','직무 대체 불안','AI 의존으로 역량 저하','없음']},
 
+ {id:'F6_interview', s:5, type:'text', t:'인터뷰 대상자를 찾고 있습니다', sub:'AI 활용 관련 인터뷰(20분 내외)가 가능하신 분은 성함을 적어 주세요 — 선택 · 인터뷰 연락에만 쓰고 응답 내용과 함께 공개하지 않습니다', req:0, ph:'성함 (선택)', maxlen:20},
  {id:'F5_comment', s:5, type:'textarea', t:'하고 싶은 말', sub:'AI · 자동화 · 협회 지원에 대해 무엇이든', req:0, ph:'예) 팀 공용 계정을 만들어 주면 좋겠다 / 자체 제작 도구를 소개하고 싶다'},
 ];
 
@@ -361,7 +365,7 @@ function render(){
     html += `</section>`;
   });
   root.innerHTML = html;
-  $('#chipN').textContent = '최대 ' + qNo + '문항';
+  $('#chipN').textContent = '최대 ' + qNo + '문항'; $('#periodN').textContent = CONFIG.period; $('#periodN2').textContent = CONFIG.period;
   const c = CONFIG.contact;
   $('#foot').innerHTML = `<div class="in"><div class="fb">KMA 한국능률협회 · ${esc(c.team)}</div><div class="fl"><span>문의 : ${esc(c.name)}</span><span>내선 : ${esc(c.tel)}</span><span>이메일 : <a href="mailto:${esc(c.mail)}">${esc(c.mail)}</a></span></div><p class="fn">응답 데이터는 담당 부서만 열람하며, 결과는 부서 단위로만 집계 · 공유됩니다.</p><p class="fc">© KMA 한국능률협회</p></div>`;
 }
